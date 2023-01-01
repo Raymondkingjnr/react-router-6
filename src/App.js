@@ -8,6 +8,8 @@ import SharedLayout from "./pages/SharedLayout";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import SingleProduct from "./pages/SingleProduct";
+import ProtectedRoute from "./pages/ProtectedRoute";
+import SharedLayoutProduct from "./pages/SharedLayoutProduct";
 function App() {
   const [user, setUser] = useState(null);
   return (
@@ -17,12 +19,20 @@ function App() {
           <Route path="/" element={<SharedLayout />}>
             <Route path="/" element={<Home />}></Route>
             <Route path="about" element={<About />}></Route>
-            <Route path="products" element={<Products />} />
-            <Route path="products/:productId" element={<SingleProduct />} />
-            <Route path="login" element={<Login user={user} />}></Route>
+
+            <Route path="products" element={<SharedLayoutProduct />}>
+              <Route index element={<Products />} />
+              <Route path=":productId" element={<SingleProduct />} />
+            </Route>
+
+            <Route path="login" element={<Login setUser={setUser} />}></Route>
             <Route
               path="dashboard"
-              element={<Dashboard setUser={setUser} />}
+              element={
+                <ProtectedRoute user={user}>
+                  <Dashboard user={user} />
+                </ProtectedRoute>
+              }
             ></Route>
             <Route path="*" element={<Error />} />
           </Route>

@@ -27,12 +27,6 @@ function Nav() {
       >
         login
       </NavLink>
-      <NavLink
-        to="dashboard"
-        className={({ isActive }) => (isActive ? "link active" : "link")}
-      >
-        dashboard
-      </NavLink>
     </div>
   );
 }

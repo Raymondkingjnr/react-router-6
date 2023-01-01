@@ -4,8 +4,6 @@ const Products = () => {
   return (
     <>
       <section className="section">
-        <h2>product</h2>
-
         <div className="products">
           {product.map((product) => {
             return (
